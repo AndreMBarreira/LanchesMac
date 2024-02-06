@@ -1,4 +1,6 @@
 ﻿using LanchesMac.Models;
+using LanchesMac.Repositories.Interfaces;
+using LanchesMac.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,15 +10,24 @@ namespace LanchesMac.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILancheRepository _lancheRepository;
+
+        public HomeController(ILogger<HomeController> logger,
+            ILancheRepository lancheRepository)
         {
             _logger = logger;
+            _lancheRepository = lancheRepository;
         }
 
         public IActionResult Index()
         {
             TempData["Nome"] = "Macarotti";
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                LanchePreferidos = _lancheRepository.LanchesPreferidos
+            };
+            
+            return View(homeViewModel);
         }
 
         public IActionResult Privacy()
