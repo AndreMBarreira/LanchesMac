@@ -14,10 +14,21 @@ namespace LanchesMac.Controllers
             _lancheRepository = lancheRepository;
         }
 
-        public IActionResult List()
+        public IActionResult List(string categoria)
         {
+            IEnumerable<Lanche> lanches;
+            string categoriaAtual = string.Empty;
+            if (string.IsNullOrEmpty(categoria))
+            {
+                lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
+                categoriaAtual = "Todos os lanches";
+            }
+            else
+            {
 
-            return View(lanchesListViewModel);
+            }
+            //return View(lanchesListViewModel);
+            return View();
         }
     }
 }

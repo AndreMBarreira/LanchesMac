@@ -19,7 +19,7 @@ public class Startup
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        
+
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -55,6 +55,16 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllerRoute(
+                name: "teste",
+                pattern: "testeme",
+                defaults: new {controller="teste", action="index"});
+
+            endpoints.MapControllerRoute(
+                name: "admin",
+                pattern: "admin/{action=Index}/{id?}",
+                defaults: new {controller="admin"});
+
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
