@@ -16,21 +16,8 @@ namespace LanchesMac.Controllers
 
         public IActionResult List()
         {
-            ViewData["Titulo"] = "Todos os lanches";
-            ViewData["Data"] = DateTime.Now;
 
-            //Essas linha foram comentadas pois foram substituidas por ViewModel
-            //var lanches = _lancheRepository.Lanches;
-            //var totalLanches = lanches.Count();
-
-            var lanchesListViewModel = new LancheListViewModel();
-            lanchesListViewModel.Lanches = _lancheRepository.Lanches;
-            lanchesListViewModel.CategoriaAtual = "Categoria atual";
-            ViewBag.Total = "Total de lanches : ";
-            var totalLanches = lanchesListViewModel.Lanches.Count();
-            ViewBag.TotalLanches = totalLanches;
             return View(lanchesListViewModel);
-            //return View(lanches);
         }
     }
 }

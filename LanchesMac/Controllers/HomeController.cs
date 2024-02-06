@@ -21,7 +21,7 @@ namespace LanchesMac.Controllers
 
         public IActionResult Index()
         {
-            TempData["Nome"] = "Macarotti";
+
             var homeViewModel = new HomeViewModel
             {
                 LanchePreferidos = _lancheRepository.LanchesPreferidos
