@@ -25,10 +25,20 @@ namespace LanchesMac.Controllers
             }
             else
             {
+                lanches = _lancheRepository.Lanches
+                    .Where(l => l.Categoria.CategoriaNome.Equals(categoria))
+                    .OrderBy(c => c.Nome);
 
+                categoriaAtual = categoria;
             }
+
+            var lanchesListViewModel = new LancheListViewModel
+            {
+                Lanches = lanches,
+                CategoriaAtual = categoriaAtual
+            };
             //return View(lanchesListViewModel);
-            return View();
+            return View(lanchesListViewModel);
         }
     }
 }
