@@ -50,7 +50,7 @@ namespace LanchesMac.Controllers
 
             if (lancheSelecionado != null)
             {
-                _carrinhoCompra.AdicionarAoCarrinho(lancheSelecionado);
+                _carrinhoCompra.RemoverDoCarrinho(lancheSelecionado);
             }
             return RedirectToAction("Index");
         }
