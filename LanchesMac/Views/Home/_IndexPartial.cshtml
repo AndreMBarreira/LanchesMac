@@ -1,0 +1,23 @@
+﻿<div class="row g-0">
+    @{
+        string[] imgs =
+                {
+            "~/images/carousel11.jpg",
+            "~/images/carousel12.jpg",
+            "~/images/carousel13.jpg",
+            "~/images/carousel11.jpg",
+            "~/images/carousel12.jpg"
+        };
+
+    }
+
+    @foreach(var img in imgs)
+    {
+        <div class="col-xl-2 col-md-2">
+            <a class="card" asp-action="List" asp-controller="Lanche">
+                <img src="@Url.Content(img)" alt="Lanches" width="450" height="220"/>
+            </a>
+        </div>
+    }
+
+</div>

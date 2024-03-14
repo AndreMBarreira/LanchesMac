@@ -1,13 +1,62 @@
 ﻿@model HomeViewModel
 
-<partial name="_Carousel"/>
+<div class="row text-center">
+    <h2>Lanches</h2>
+</div>
 
-<h2>Os preferidos da semana </h2>
-<h4>Tá com fome ???</h4>
+<div class="container">
+    <section id="sobre">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-sm-6 col-md-3 text-center">
+                <i class="bi bi-heart"></i>
+                <h4>Feitos com amor</h4>
+                <p class="text-muted">Fazemos seu lanche.</p>
+            </div>
+            <div class="col-sm-12 col-sm-6 col-md-3 text-center">
+                <i class="bi bi-send"></i>
+                <h4>Prontos para entrega</h4>
+                <p class="text-muted">Entregamos o seu pedido.</p>
+            </div>
+            <div class="col-sm-12 col-sm-6 col-md-3 text-center">
+                <i class="bi bi-percent"></i>
+                <h4>Preços Camaradas</h4>
+                <p class="text-muted">Promoções imperdíveis.</p>
+            </div>
+            <div class="col-sm-12 col-sm-6 col-md-3 text-center">
+                <i class="bi bi-flower2"></i>
+                <h4>Lanches Naturais</h4>
+                <p class="text-muted">...saudáveis e naturais...</p>
+            </div>
+        </div>
+    </section>
 
-<div class="row">
-    @foreach(var lanche in Model.LanchePreferidos)
-    {
-        <partial name="_LanchesResumo" for="@lanche"/>
-    }
+    <section id="portfolio">
+        @await Html.PartialAsync("_IndexPartial")
+    </section>
+
+    <br />
+
+    <section id="contato">
+        <div class="row">
+            <div class="col-10 col-md-5 col-lg-5 offset-1" style="color: black">
+                <h4> &copy; 2024 - LanchesMac</h4>
+                <p class="text-justify">
+                    Aqui você encontra aquele lanche gostoso que dá água na boca.
+                    Aquela sobremesa saborosa e para acompanhar a sua bebida preferida.
+                    E se você é vegetariano também vai encontrar o lanche, sobremesa e bebida do seu gosto.
+                </p>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 offset-1" style="color: black">
+                <h4>Tem alguma dúvida ?</h4>
+                <p class="text-justify">
+                    <li class="py-1">Rua Vinte e Cinco A, 81, Centro</li>
+                    <li class="py-1">+55 (21) 988459453</li>
+                    <li class="py-1"><a href="lanchemac@hotmail.com" style="color: blue">lanchesmaior</a></li>
+                    </p>
+            </div>
+
+        </div>
+
+    </section>
+
 </div>
