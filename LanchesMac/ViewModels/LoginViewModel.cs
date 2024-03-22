@@ -7,11 +7,11 @@ namespace LanchesMac.ViewModels
     {
         [Required(ErrorMessage = "Informe o {0}")]
         [Display(Name = "Usuário")]
-        public string UserName;
+        public string UserName { get; set; }
         [Required(ErrorMessage = "Informe o {0}")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password;
-        public string ReturnUrl;
+        public string Password { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }

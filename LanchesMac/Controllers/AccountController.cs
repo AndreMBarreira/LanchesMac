@@ -16,7 +16,7 @@ namespace LanchesMac.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login(string? returnUrl)
         {
             return View(new LoginViewModel()
             {
@@ -26,12 +26,10 @@ namespace LanchesMac.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login (LoginViewModel loginVM)
+        public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
-            if(!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)
                 return View(loginVM);
-            }
 
             var user = await _userManager.FindByNameAsync(loginVM.UserName);
 
@@ -47,8 +45,47 @@ namespace LanchesMac.Controllers
                     return Redirect(loginVM.ReturnUrl);
                 }
             }
+
             ModelState.AddModelError("", "Falha ao realizar login!");
             return View(loginVM);
         }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginViewModel registroVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = registroVM.UserName };
+                var result = await _userManager.CreateAsync(user, registroVM.Password);
+
+                if (result.Succeeded)
+                {
+                    //await _signInManger.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Registro", "Falha ao registrar o usuário");
+                }
+            }
+            return View(registroVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.User = null;
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
