@@ -20,11 +20,11 @@ public class Startup
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        
+
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
-        
+
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
@@ -63,6 +63,10 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllerRoute(
+                 name: "areas",
+                 pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
             endpoints.MapControllerRoute(
                 name: "categoriaFiltro",
                 pattern: "Lanche/{action}/{categoria?}",
