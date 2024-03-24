@@ -68,6 +68,8 @@ namespace LanchesMac.Controllers
                 if (result.Succeeded)
                 {
                     //await _signInManger.SignInAsync(user, isPersistent: false);
+                    //todos serao Member e apenas um será admin
+                    await _userManager.AddToRoleAsync(user, "Member");
                     return RedirectToAction("Login", "Account");
                 }
                 else
