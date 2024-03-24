@@ -31,14 +31,44 @@ namespace LanchesMac.Services
             }
         }
 
-        public void SeedRoles()
+        public async void SeedUsers()
         {
-            throw new NotImplementedException();
-        }
+            if (_userManager.FindByEmailAsync("usuario@localhost").Result == null)
+            {
+                IdentityUser user = new IdentityUser();
+                user.UserName = "usuario@localhost";
+                user.Email = "usuario@localhost";
+                user.NormalizedUserName = "USUARIO@LOCALHOST";
+                user.NormalizedEmail = "USUARIO@LOCALHOST";
+                user.EmailConfirmed = true;
+                user.LockoutEnabled = false;
+                user.SecurityStamp = Guid.NewGuid().ToString();
 
-        public void SeedUsers()
-        {
-            throw new NotImplementedException();
+                IdentityResult result = _userManager.CreateAsync(user,"Naosei#2024").Result;
+
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(user,"Member").Wait();
+                }
+            }
+            if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
+            {
+                IdentityUser user = new IdentityUser();
+                user.UserName = "admin@localhost";
+                user.Email = "admin@localhost";
+                user.NormalizedUserName = "ADMIN@LOCALHOST";
+                user.NormalizedEmail = "ADMIN@LOCALHOST";
+                user.EmailConfirmed = true;
+                user.LockoutEnabled = false;
+                user.SecurityStamp = Guid.NewGuid().ToString();
+
+                IdentityResult result = _userManager.CreateAsync(user, "Naosei#2024").Result;
+
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
         }
     }
 }
